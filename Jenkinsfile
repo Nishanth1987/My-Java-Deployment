@@ -19,13 +19,17 @@ pipeline {
                               '''
                               }
                            }
-                        
-                        stage ('Deploy to tomcat server') {
-                                
-                                     deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.110.54.77:8080')], contextPath: null, war: '**/*.war'
-                                
-                                    }
-                       
+                                                
+                       stage ('DEPLOY') {
+                              steps {
+                              sh '''
+                              #!/bin/bash
+                              deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.110.54.77:8080')], contextPath: null, war: '**/*.war'
+                              sudo systemctl start tomcat
+                              echo "Deployed war file to tomcat successfully"
+                              '''
+                              }  
+                       }
                         stage ('TEST') {
                               steps {
                               sh '''
