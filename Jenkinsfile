@@ -13,7 +13,7 @@ pipeline {
                               steps {
                               sh '''
                               #!/bin/bash
-                              cd /home/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project
+                              cd /var/lib/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project
                               mvn clean install
                               echo "Build is successful"
                               '''
@@ -23,7 +23,7 @@ pipeline {
                               steps {
                               sh '''
                               #!/bin/bash
-                              sudo cp /home/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project/target/hello-world-war-1.0.0.war /opt/tomcat/webapps/
+                              sudo cp /var/lib/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project/target/hello-world-war-1.0.0.war /opt/tomcat/webapps/
                               sudo systemctl start tomcat
                               echo "Deployed war file to tomcat successfully"
                               '''
@@ -32,7 +32,7 @@ pipeline {
                         stage ('TEST') {
                               steps {
                               sh '''
-                              cd /home/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project
+                              cd /var/lib/jenkins/workspace/Java_Deployment_23_11_2022/helloworld/1project
                               mvn test
                               echo "Tested successfully"
                               '''
